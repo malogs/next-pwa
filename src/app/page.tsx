@@ -19,7 +19,7 @@ const Login = () => {
     if (user) {
       toast("Already Signed in as: " + user.displayName, {type: 'success', theme: 'dark'});
       setTimeout(() => {
-        router.push("/home");
+        router.push("/dashboard/home");
       }, 500);
     }
   }, [router]);
@@ -40,7 +40,7 @@ const Login = () => {
       localStorage.setItem('maL_user', JSON.stringify(res.user));
       toast("Signed in as: " +  res.user.displayName, {type: 'success', theme: 'dark'});
       setTimeout(() => {
-        router.push("/home");
+        router.push("/dashboard/home");
       }, 500);
     } catch (error: any) {
       

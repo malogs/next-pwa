@@ -16,7 +16,9 @@
       "src": "/512x512.png",
       "sizes": "512x512",
       "type": "image/png"
-    },
+    }
+  ],
+  "screenshots": [
     {
       "src": "/desktop.png",
       "sizes": "3600x2338",

@@ -1,7 +1,8 @@
 "use client"
 
-import Nav from '@/components/Nav'
 import { useEffect, useState } from 'react'
+import Nav from '@/components/Nav'
+import InstallBtn from '@/components/InstallBtn';
 
 const Home = () => {
   const [name, setName] = useState("")
@@ -13,12 +14,12 @@ const Home = () => {
   }, [])
   return (
     <>
-    <Nav />
-    <div className='mx-4 my-6'>
-      <p className='text-2xl'>Hi {name},</p>
-      <p>Keep track of your expenses here.</p>
-
-    </div>
+      <Nav />
+      <div className='mx-4 my-6'>
+        <p className='text-2xl'>Hi {name},</p>
+        <p>Keep track of your expenses here.</p>
+      </div>
+      <InstallBtn />
     </>
   )
 }
