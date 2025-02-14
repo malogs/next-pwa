@@ -25,7 +25,20 @@
 const withPWA = require('next-pwa')({
   register: true,
   dest: 'public',
-  skipWaiting: true,
+  // skipWaiting: true,
+  runtimeCaching: [
+    {
+      urlPattern: /^https:\/\/localhost:3000\/_next\//,
+      handler: "NetworkFirst",
+      options: {
+        cacheName: "next-assets",
+        expiration: {
+          maxEntries: 50,
+          maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+        },
+      },
+    },
+  ],
 })
 
 module.exports = withPWA({

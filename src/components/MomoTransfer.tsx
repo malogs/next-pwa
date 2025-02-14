@@ -9,12 +9,6 @@ import { IoBus, IoFastFood } from 'react-icons/io5';
 import { GiPayMoney } from 'react-icons/gi';
 import { useRouter } from 'next/navigation';
 
-interface IContact {
-  name: string;
-  phone: string;
-  image: string;
-}
-
 const MomoTransfer = () => {
   const router = useRouter();
 
@@ -80,10 +74,27 @@ const MomoTransfer = () => {
       const saved = JSON.parse(
         localStorage.getItem('maL_transactions') ?? '[]'
       );
+      const money = +amount;
+      const charges = money <= 1000 ? 20 
+        : money <= 5000? 100 
+        : money <= 15000? 200 
+        : money <= 30000? 300 
+        : money <= 45000? 400 
+        : money <= 60000? 500
+        : money <= 75000? 600
+        : money <= 100000? 700
+        : money <= 150000? 800
+        : money <= 300000? 1000
+        : money <= 500000? 1500
+        : money <= 1000000? 2000
+        : money <= 2000000? 3000
+        : 0;
       saved.push({
         reason,
         date: new Date().toISOString(),
-
+        receipient: receipientObj,
+        amount: money,
+        charges,
       });
       localStorage.setItem('maL_transactions', JSON.stringify(saved));
     }

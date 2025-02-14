@@ -29,6 +29,9 @@ const Teansact = () => {
 
   return (
     <div>
+      <div className='mb-4'>
+        <p className="text-2xl text-center ">Transact</p>
+      </div>
       <MomoTransfer />
     </div>
   );
