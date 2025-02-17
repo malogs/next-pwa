@@ -101,6 +101,12 @@ const MomoTransfer = () => {
 
     router.push('/dashboard/home');
   }
+
+  function sendMoney() {
+    window.location.href = `tel:${ussd}`
+    setPage((prev) => prev + 1);
+  }
+
   return (
     <div>
       {page === 1 && (
@@ -205,13 +211,14 @@ const MomoTransfer = () => {
           Prev
         </Button>
       )}
+
       {page < maxPage - 1 && (
         <Button
           disabled={page >= maxPage || !allowNext}
           onClick={() => {
             setAllowNext(false);
             setPage((prev) => prev + 1);
-            setUssd(`*182*${ussd.length >= 10 ? '1' : '8'}*1*${amount}#`);
+            setUssd(`*182*${receipientObj!.phone.length == 10 ? '1' : '8'}*1*${receipientObj!.phone}`);
           }}
         >
           Next
@@ -251,14 +258,19 @@ const MomoTransfer = () => {
               placeholder='0.00'
               value={amount}
               onChange={(e) => {
-                setAmount(parseFloat(e.target.value));
+                setAmount(parseFloat(e.target.value.trim()));
                 setAllowNext(true);
+                setUssd(`*182*${receipientObj!.phone.length == 10 ? '1' : '8'}*1*${receipientObj!.phone}*${parseFloat(e.target.value.trim())}#`);
+              }}
+              onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                setAmount(parseFloat(e.currentTarget.value));
+                setUssd(`*182*${receipientObj!.phone.length == 10 ? '1' : '8'}*1*${receipientObj!.phone}*${parseFloat(e.currentTarget.value.trim())}#`);
               }}
             />
           </div>
-          <a href={`tel:${ussd}`} onClick={() => setPage((prev) => prev + 1)}>
+          <Button onClick={sendMoney}>
             Send
-          </a>
+          </Button>
         </div>
       )}
 

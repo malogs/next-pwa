@@ -1,4 +1,5 @@
 import MomoTransfer from '@/components/MomoTransfer';
+// import { db } from '@/firebase';
 
 // interface IContact {
 //   name: string;
@@ -6,7 +7,7 @@ import MomoTransfer from '@/components/MomoTransfer';
 //   tel: string;
 // }
 
-const Teansact = () => {
+const Teansact = async () => {
   // const [contacts, setContacts] = useState<IContact[]>([]);
   // useEffect(() => {
   //   (async () => {
@@ -26,6 +27,7 @@ const Teansact = () => {
   //     }
   //   })();
   // }, []);
+  // const contacts = await db
 
   return (
     <div>
