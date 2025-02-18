@@ -1,53 +1,26 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-// import withPWA from "next-pwa";
+/** @type {import('next').NextConfig} */
+const runtimeCaching = require("next-pwa/cache");
 
-// const nextConfig = {
-//   images: {
-//     remotePatterns: [
-//       {
-//         protocol: "https",
-//         hostname: "ui-avatars.com",
-//       },
-//     ],
-//   },
-// };
+const nextDataIndex = runtimeCaching.findIndex(
+  (entry) => entry.options.cacheName === "next-data"
+);
 
-// export default withPWA({
-//   ...nextConfig,
-//   pwa: {
-//     register: true,
-//     skipWaiting: true,
-//     disable: process.env.NODE_ENV === "development",
-//     mode: "production"
-//   },
-// });
+if (nextDataIndex !== -1) {
+  runtimeCaching[nextDataIndex].handler = "NetworkFirst";
+} else {
+  throw new Error("Failed to find next-data object in runtime caching");
+}
 
-const withPWA = require('next-pwa')({
+const withPWA = require("next-pwa")({
+  dest: "public",
+  runtimeCaching,
   register: true,
-  dest: 'public',
-  // skipWaiting: true,
-  runtimeCaching: [
-    {
-      urlPattern: /^https:\/\/localhost:3000\/_next\//,
-      handler: "NetworkFirst",
-      options: {
-        cacheName: "next-assets",
-        expiration: {
-          maxEntries: 50,
-          maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
-        },
-      },
-    },
-  ],
+  skipWaiting: true,
+  buildExcludes: [/app-build-manifest.json$/],
+  disable: process.env.NODE_ENV === 'development'
 })
 
 module.exports = withPWA({
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "ui-avatars.com",
-      },
-    ],
-  },
-})
+  reactStrictMode: false
+});
