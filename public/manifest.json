@@ -1,12 +1,17 @@
 {
   "id": "/",
-  "name": "MaLogs App",
-  "short_name": "MaLogs",
-  "description": "A Next.js Malogs Progressive Web App",
+  "name": "Walletia",
+  "short_name": "Walletia",
+  "description": "A Next.js Walletia Progressive Web App",
   "start_url": "/?mode=standalone",
   "display": "standalone",
   "orientation": "portrait",
-  "display_override": ["fullscreen", "minimal-ui"],
+  "display_override": [
+    "fullscreen",
+    "minimal-ui",
+    "standalone",
+    "window-controls-overlay"
+  ],
   "background_color": "#ffffff",
   "theme_color": "#000000",
   "icons": [
@@ -43,5 +48,6 @@
       "sizes": "784x1688",
       "type": "image/png"
     }
-  ]
+  ],
+  "dir": "ltr"
 }
